@@ -6,6 +6,7 @@ import plotly_express as px
 from time_filtering import filter_time
 import pandas as pd
 from layout import Layout
+import dash_bootstrap_components as dbc
 
 directory_path = os.path.dirname(__file__)
 path = os.path.join(directory_path, "stocksdata")
@@ -20,7 +21,12 @@ df_dict = {symbol: stockdata_object.stock_dataframe(symbol) for symbol in symbol
 
 
 # create a Dash app
-app = dash.Dash(__name__)
+app = dash.Dash(
+    __name__,
+    external_stylesheets=[dbc.themes.MINTY],
+    # makes possible for responsivity
+    meta_tags=[dict(name="viewport", content="width=device-width, initial-scale=1.0")],
+)
 
 app.layout = Layout(symbol_dict).layout()
 
