@@ -11,19 +11,16 @@ import dash_bootstrap_components as dbc
 directory_path = os.path.dirname(__file__)
 path = os.path.join(directory_path, "stocksdata")
 
-
 stockdata_object = StockData(path)
-
 
 symbol_dict = {"AAPL": "Apple", "NVDA": "Nvidia", "TSLA": "Tesla", "IBM": "IBM"}
 
 df_dict = {symbol: stockdata_object.stock_dataframe(symbol) for symbol in symbol_dict}
 
-
-# create a Dash app
+# create a Dash App
 app = dash.Dash(
     __name__,
-    external_stylesheets=[dbc.themes.MINTY],
+    external_stylesheets=[dbc.themes.MATERIA],
     # makes possible for responsivity
     meta_tags=[dict(name="viewport", content="width=device-width, initial-scale=1.0")],
 )
@@ -49,8 +46,8 @@ def filter_df(stock, time_index):
 
 
 @app.callback(
-    Output("highest value", "children"),
-    Output("lowest value", "children"),
+    Output("highest-value", "children"),
+    Output("lowest-value", "children"),
     Input("filtered-df", "data"),
     Input("ohlc-radio", "value"),
 )
